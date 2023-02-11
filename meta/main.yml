@@ -7,20 +7,20 @@ galaxy_info:
   author: Marko Samuli Kirves
   description: Install Linuxbrew
   license: MIT
-  min_ansible_version: 2.6
+  min_ansible_version: "2.6"
   github_branch: master
   platforms:
     - name: Ubuntu
       versions:
-        - xenial
-        - bionic
+        - jammy
+        - kinetic
     - name: Debian
       versions:
-        - buster
-        - stretch
+        - bullseye
+        - bookworm
     - name: Fedora
       versions:
-        - 35
+        - "36"
   galaxy_tags:
     - linuxbrew
     - homebrew
