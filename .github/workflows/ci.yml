@@ -4,15 +4,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  image:
     runs-on: ubuntu-latest
-    container:
-      image: fedora:37
     steps:
     - uses: actions/checkout@v3
     - name: Build
       run: |
-        dnf -y install ansible
+        docker build -t fedora-test -f tests/fedora-dockerfile
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora-test
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: |
         ansible --version
         printf '[defaults]\nroles_path=../\n' > ansible.cfg
         ansible-playbook tests/test.yml -i tests/inventory --syntax-check
