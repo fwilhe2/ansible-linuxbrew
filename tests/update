@@ -6,7 +6,6 @@ cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
 
 user="test"
 repository="$(basename $(dirname $(pwd)))"
-ansible_version="7.2.0"
 
 image="ubuntu"
 ubuntu_releases=(jammy kinetic)
@@ -18,7 +17,6 @@ for tag in "${ubuntu_releases[@]}"; do
         -e 's!%%FROM%%!'"$image:$tag"'!g' \
         -e 's!%%USER%%!'"$user"'!g' \
         -e 's!%%REPOSITORY%%!'"$repository"'!g' \
-        -e 's!%%ANSIBLE_VERSION%%!'"$ansible_version"'!g' \
         "Dockerfile.template" > "$dir/Dockerfile"
 done
 
@@ -32,6 +30,5 @@ for tag in "${debian_releases[@]}"; do
         -e 's!%%FROM%%!'"$image:$tag"'!g' \
         -e 's!%%USER%%!'"$user"'!g' \
         -e 's!%%REPOSITORY%%!'"$repository"'!g' \
-        -e 's!%%ANSIBLE_VERSION%%!'"$ansible_version"'!g' \
         "Dockerfile.template" > "$dir/Dockerfile"
 done

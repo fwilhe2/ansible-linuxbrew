@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
-ARG ansible_version="7.2.0"
-ENV ANSIBLE_VERSION="${ansible_version}"
 RUN pip install ansible
 
 RUN apt-get update && apt-get install -y \
