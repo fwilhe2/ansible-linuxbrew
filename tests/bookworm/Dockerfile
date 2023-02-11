@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y \
     python-minimal \
@@ -33,8 +33,5 @@ RUN touch /home/${user}/.zshrc \
 RUN mkdir -p /home/${user}/${repository} ; \
     chown -R ${user}:${user} /home/${user}/${repository}
 VOLUME ["/home/${user}/${repository}"]
-
-# Make sure we have the latest packages
-RUN apt-get update
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"

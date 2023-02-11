@@ -9,7 +9,7 @@ repository="$(basename $(dirname $(pwd)))"
 ansible_version="<2.9.0"
 
 image="ubuntu"
-ubuntu_releases=(xenial bionic)
+ubuntu_releases=(jammy kinetic)
 for tag in "${ubuntu_releases[@]}"; do
     dir="${tag}"
     mkdir -p "${dir}"
@@ -23,7 +23,7 @@ for tag in "${ubuntu_releases[@]}"; do
 done
 
 image="debian"
-debian_releases=(stretch buster)
+debian_releases=(bullseye bookworm)
 for tag in "${debian_releases[@]}"; do
     dir="${tag}"
     mkdir -p "${dir}"
