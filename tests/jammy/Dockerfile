@@ -1,11 +1,11 @@
 FROM ubuntu:jammy
 
 RUN apt-get update && apt-get install -y \
-    python-minimal \
+    python \
     python-pip \
  && rm -rf /var/lib/apt/lists/*
 
-ARG ansible_version="<2.9.0"
+ARG ansible_version="7.2.0"
 ENV ANSIBLE_VERSION="${ansible_version}"
 RUN pip install ansible${ANSIBLE_VERSION}
 
