@@ -4,23 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  image:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build
       run: |
         docker build -t fedora-test -f tests/fedora-dockerfile .
-  build:
-    needs: image
-    runs-on: ubuntu-latest
-    container:
-      image: fedora-test
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: |
-        ansible --version
-        printf '[defaults]\nroles_path=../\n' > ansible.cfg
-        ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-        ansible-playbook tests/test.yml -i tests/inventory --connection=local -e "{'linuxbrew_use_installer':true}"
+        docker run -it -v $PWD:/data -w/data fedora-test ansible-playbook tests/test.yml -i tests/inventory --connection=local -e "{'linuxbrew_use_installer':true}"
