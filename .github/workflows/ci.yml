@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: |
+        ansible --version
+        ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+        make test
