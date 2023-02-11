@@ -11,4 +11,4 @@ jobs:
     - name: Build
       run: |
         docker build -t fedora-test -f tests/fedora-dockerfile .
-        docker run -v $PWD:/data -w/data fedora-test ansible-playbook tests/test.yml -i tests/inventory --connection=local -e "{'linuxbrew_use_installer':true}"
+        docker run -v $PWD:/data -w/data fedora-test ansible-playbook test.yml -i tests/inventory --connection=local -e "{'linuxbrew_use_installer':true}"
