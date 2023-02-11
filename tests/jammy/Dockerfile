@@ -2,7 +2,7 @@ FROM ubuntu:jammy
 
 RUN apt-get update && apt-get install -y \
     python-is-python3 \
-    python-pip \
+    python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
 ARG ansible_version="7.2.0"
