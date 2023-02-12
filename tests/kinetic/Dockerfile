@@ -1,13 +1,11 @@
-FROM ubuntu:bionic
+FROM ubuntu:kinetic
 
 RUN apt-get update && apt-get install -y \
-    python-minimal \
-    python-pip \
+    python-is-python3 \
+    python3-pip \
  && rm -rf /var/lib/apt/lists/*
 
-ARG ansible_version="<2.9.0"
-ENV ANSIBLE_VERSION="${ansible_version}"
-RUN pip install ansible${ANSIBLE_VERSION}
+RUN pip install ansible
 
 RUN apt-get update && apt-get install -y \
     zsh \
@@ -33,8 +31,5 @@ RUN touch /home/${user}/.zshrc \
 RUN mkdir -p /home/${user}/${repository} ; \
     chown -R ${user}:${user} /home/${user}/${repository}
 VOLUME ["/home/${user}/${repository}"]
-
-# Make sure we have the latest packages
-RUN apt-get update
 
 CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"

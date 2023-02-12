@@ -58,7 +58,7 @@ function start {
     local image_name=${ROLE_NAME}-${image}
     local container_name=${ROLE_NAME}-${image}-tests
     echo "*** Start container"
-    docker run --rm -it -d \
+    docker run --rm -d \
         -v ${MOUNT_ROOT}:${TEST_HOME}/${ROLE_NAME} \
         --name ${container_name} \
         $image_name
@@ -71,7 +71,7 @@ function run_tests_with_git {
     local image=$1
     local container_name=${ROLE_NAME}-${image}-tests
     echo "*** Run tests installing with Ansible from Git"
-    docker exec -it \
+    docker exec \
         --user test \
         ${container_name} \
         ${TEST_HOME}/${ROLE_NAME}/tests/run-tests-with-git
@@ -84,7 +84,7 @@ function run_tests_with_installer {
     local image=$1
     local container_name=${ROLE_NAME}-${image}-tests
     echo "*** Run tests installing with the Linuxbrew installer"
-    docker exec -it \
+    docker exec \
         --user test \
         ${container_name} \
         ${TEST_HOME}/${ROLE_NAME}/tests/run-tests-with-installer

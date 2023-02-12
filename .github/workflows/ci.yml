@@ -10,6 +10,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build
       run: |
-        ansible --version
-        ansible-playbook tests/test.yml -i tests/inventory --syntax-check
-        make test
+        docker build -t fedora-test -f fedora-dockerfile .
+        docker run -w/home/user/.ansible/roles/ansible-linuxbrew fedora-test ansible-playbook test.yml -i tests/inventory --connection=local -e "{'linuxbrew_use_installer':true}"
